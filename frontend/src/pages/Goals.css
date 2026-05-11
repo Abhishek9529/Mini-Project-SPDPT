@@ -1,0 +1,1082 @@
+/* ===== Goals Page ===== */
+.goals-page {
+    padding: 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.goals-page h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1.5rem;
+    word-wrap: break-word;
+}
+
+/* ===== Add Goal Form ===== */
+.goal-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    width: 100%;
+}
+
+.goal-form input,
+.goal-form select {
+    flex: 1 1 200px;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    background-color: var(--surface-muted);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.goal-form input::placeholder {
+    color: var(--text-muted);
+}
+
+.goal-form input:focus,
+.goal-form select:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+}
+
+.goal-form select option {
+    background-color: var(--surface-muted);
+    color: var(--text-primary);
+}
+
+/* Deadline Date Input */
+.goal-form .deadline-input {
+    flex: 0 1 180px;
+    height: auto;
+    min-height: 2.5rem;
+    line-height: 1.2;
+}
+
+.goal-form input[type="date"] {
+    height: auto;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.2;
+}
+
+.goal-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+    cursor: pointer;
+}
+
+.goal-form select {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.goal-form button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background-color: #22c55e;
+    color: var(--text-inverse);
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.goal-form button:hover {
+    background-color: #16a34a;
+    transform: translateY(-1px);
+}
+
+.goal-form button:active {
+    transform: translateY(0);
+}
+
+.goal-type-picker {
+    flex: 1 1 200px;
+    width: 100%;
+    min-width: 0;
+    position: relative;
+}
+
+.goal-form .goal-type-picker-toggle,
+.goal-edit-form .goal-type-picker-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.2;
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    background-color: var(--surface-muted);
+    color: var(--text-primary);
+    text-align: left;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.goal-form .goal-type-picker-toggle:hover,
+.goal-edit-form .goal-type-picker-toggle:hover {
+    background-color: var(--surface-muted);
+    border-color: var(--border-default);
+    transform: none;
+}
+
+.goal-form .goal-type-picker-toggle:focus,
+.goal-edit-form .goal-type-picker-toggle:focus {
+    border-color: #a78bfa;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+}
+
+.goal-type-picker-toggle span:first-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.goal-type-picker-arrow {
+    flex: 0 0 auto;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1;
+}
+
+.goal-type-picker-options {
+    width: 100%;
+    max-width: 100%;
+    max-height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 0.25rem;
+    background-color: var(--surface-muted);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.goal-form .goal-type-picker-option,
+.goal-edit-form .goal-type-picker-option {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.3;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    color: var(--text-primary);
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.goal-form .goal-type-picker-option:hover,
+.goal-form .goal-type-picker-option.selected,
+.goal-edit-form .goal-type-picker-option:hover,
+.goal-edit-form .goal-type-picker-option.selected {
+    background-color: var(--surface-hover);
+    border-color: transparent;
+    transform: none;
+}
+
+/* ===== Goal List ===== */
+.goal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.goal-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    background-color: var(--surface);
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    color: var(--text-primary);
+    transition: transform 0.15s, box-shadow 0.15s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.goal-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* Goal card layout inside list item */
+.goal-card {
+    padding: 1.25rem;
+}
+
+.goal-header-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.goal-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+}
+
+.goal-item strong {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+}
+
+.goal-item span {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.goal-deadline {
+    color: #fbbf24 !important;
+    font-weight: 600;
+}
+
+/* ===== Goal Actions & Edit Form ===== */
+.goal-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.goal-actions button {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+    color: var(--text-inverse);
+    white-space: nowrap;
+}
+
+.goal-actions button:hover {
+    transform: translateY(-1px);
+}
+
+.goal-actions button:active {
+    transform: translateY(0);
+}
+
+.edit-btn {
+    background-color: #3b82f6;
+}
+
+.edit-btn:hover {
+    background-color: #2563eb;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+.save-btn {
+    background-color: #22c55e;
+}
+
+.save-btn:hover {
+    background-color: #16a34a;
+}
+
+.cancel-btn {
+    background-color: #64748b;
+}
+
+.cancel-btn:hover {
+    background-color: #475569;
+}
+
+.goal-edit-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.editing-goal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .editing-goal {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.goal-edit-form input,
+.goal-edit-form select {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-default);
+    border-radius: 6px;
+    background-color: var(--surface-muted);
+    color: var(--text-primary);
+    outline: none;
+    flex: 1;
+    min-width: 120px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.edit-goal-type-picker {
+    flex: 1;
+    min-width: 120px;
+}
+
+.goal-edit-form .goal-type-picker-toggle {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+}
+
+.goal-edit-form input:focus,
+.goal-edit-form select:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+}
+
+.empty-message {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* ===== Action Plan Button ===== */
+.plan-btn {
+    background-color: #7c3aed;
+    color: var(--text-inverse);
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s;
+    white-space: nowrap;
+}
+
+.plan-btn:hover {
+    background-color: #6d28d9;
+    transform: translateY(-1px);
+}
+
+.plan-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== Action Plan Form ===== */
+.ap-form {
+    margin-top: 0.75rem;
+    padding: 1rem;
+    background-color: var(--surface-muted);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ap-form-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #a78bfa;
+    margin: 0 0 0.75rem;
+}
+
+.ap-step-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.ap-step-input {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-default);
+    border-radius: 6px;
+    background-color: var(--surface-hover);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.ap-step-input:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+}
+
+.ap-step-input::placeholder {
+    color: var(--text-muted);
+}
+
+.ap-remove-step {
+    background: #ef4444;
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.15s;
+    flex-shrink: 0;
+}
+
+.ap-remove-step:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+.ap-remove-step:active {
+    transform: scale(1);
+}
+
+.ap-form-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.ap-add-step-btn {
+    background-color: var(--surface-hover);
+    color: #a78bfa;
+    border: 1px solid #a78bfa;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.15s;
+}
+
+.ap-add-step-btn:hover {
+    background-color: #a78bfa;
+    color: var(--text-inverse);
+    transform: translateY(-1px);
+}
+
+.ap-add-step-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== Action Plan Display ===== */
+.ap-display {
+    margin-top: 0.75rem;
+    padding: 1rem;
+    background-color: var(--surface-muted);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ap-display-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.ap-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #a78bfa;
+}
+
+.ap-delete-btn {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+}
+
+.ap-steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.ap-step-item {
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    background-color: var(--surface-hover);
+    transition: background-color 0.2s;
+    border: 1px solid transparent;
+}
+
+.ap-step-item:hover {
+    border-color: var(--border-default);
+}
+
+.ap-step-item.ap-step-done {
+    background-color: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.ap-step-label {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.ap-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #22c55e;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.ap-step-title {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+}
+
+.ap-step-done .ap-step-title {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.ap-task-badge {
+    font-size: 0.75rem;
+    color: #22c55e;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.loading-text {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+}
+
+/* ===== Tablet Responsive (768px and below) ===== */
+@media (max-width: 768px) {
+    .goals-page {
+        padding: 1.5rem;
+    }
+
+    .goals-page h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .goal-form {
+        gap: 0.65rem;
+    }
+
+    .goal-form input,
+    .goal-form select {
+        font-size: 0.9rem;
+    }
+
+    .goal-form button {
+        font-size: 0.9rem;
+        padding: 0.65rem 1.25rem;
+    }
+
+    .goal-item {
+        padding: 1.1rem;
+    }
+
+    .goal-item strong {
+        font-size: 1.05rem;
+    }
+
+    .goal-actions button {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .ap-form {
+        padding: 0.9rem;
+    }
+
+    .ap-display {
+        padding: 0.9rem;
+    }
+}
+
+/* ===== Mobile Responsive (640px and below) ===== */
+@media (max-width: 640px) {
+    .goals-page {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .goals-page h2 {
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
+    }
+
+    .goal-form {
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .goal-form input,
+    .goal-form select,
+    .goal-form button,
+    .goal-type-picker {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .goal-form input,
+    .goal-form select,
+    .goal-form button,
+    .goal-form .goal-type-picker-toggle,
+    .goal-form .goal-type-picker-option {
+        font-size: 0.9rem;
+        padding: 0.65rem 0.85rem;
+    }
+
+    .goal-form input[type="date"] {
+        flex: 0 0 auto;
+        height: 2.25rem;
+        min-height: 2.25rem;
+        padding: 0.4rem 0.75rem;
+        line-height: 1.2;
+    }
+
+    .goal-form select {
+        max-height: 150px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .goal-form select option {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .goal-item {
+        padding: 1rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .goal-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.65rem;
+    }
+
+    .goal-info {
+        width: 100%;
+    }
+
+    .goal-item strong {
+        font-size: 1rem;
+    }
+
+    .goal-item span {
+        font-size: 0.8rem;
+    }
+
+    .goal-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .goal-actions button {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.75rem;
+    }
+
+    .goal-edit-form {
+        width: 100%;
+    }
+
+    .goal-edit-form input,
+    .goal-edit-form select,
+    .goal-edit-form .goal-type-picker-toggle,
+    .goal-edit-form .goal-type-picker-option {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .goal-edit-form select {
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    .ap-form {
+        padding: 0.9rem;
+    }
+
+    .ap-form-title {
+        font-size: 0.95rem;
+    }
+
+    .ap-step-input {
+        font-size: 0.85rem;
+        padding: 0.55rem 0.7rem;
+    }
+
+    .ap-remove-step {
+        width: 26px;
+        height: 26px;
+        font-size: 0.8rem;
+    }
+
+    .ap-form-actions button {
+        font-size: 0.8rem;
+        padding: 0.45rem 0.75rem;
+    }
+
+    .ap-display {
+        padding: 0.9rem;
+    }
+
+    .ap-label {
+        font-size: 0.9rem;
+    }
+
+    .ap-steps-list {
+        max-height: 300px;
+    }
+
+    .ap-step-item {
+        padding: 0.55rem 0.7rem;
+    }
+
+    .ap-step-title {
+        font-size: 0.85rem;
+    }
+
+    .ap-checkbox {
+        width: 16px;
+        height: 16px;
+    }
+
+    .ap-task-badge {
+        font-size: 0.7rem;
+    }
+
+    .empty-message {
+        padding: 1.75rem 1rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== Small Mobile Responsive (480px and below) ===== */
+@media (max-width: 480px) {
+    .goals-page {
+        padding: 0.85rem;
+    }
+
+    .goals-page h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .goal-form {
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .goal-form input,
+    .goal-form select,
+    .goal-form button,
+    .goal-form .goal-type-picker-toggle,
+    .goal-form .goal-type-picker-option {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .goal-form input[type="date"] {
+        flex: 0 0 auto;
+        height: 2.1rem;
+        min-height: 2.1rem;
+        padding: 0.35rem 0.7rem;
+        line-height: 1.2;
+    }
+
+    .goal-form select {
+        max-height: 120px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .goal-form select option {
+        padding: 0.45rem;
+        font-size: 0.85rem;
+    }
+
+    .goal-item {
+        padding: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .goal-header-row {
+        gap: 0.6rem;
+    }
+
+    .goal-item strong {
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+
+    .goal-item span {
+        font-size: 0.75rem;
+    }
+
+    .goal-actions {
+        gap: 0.4rem;
+    }
+
+    .goal-actions button {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.65rem;
+    }
+
+    .goal-edit-form input,
+    .goal-edit-form select,
+    .goal-edit-form .goal-type-picker-toggle,
+    .goal-edit-form .goal-type-picker-option {
+        font-size: 0.8rem;
+        padding: 0.55rem 0.7rem;
+    }
+
+    .goal-edit-form select {
+        max-height: 120px;
+        overflow-y: auto;
+    }
+
+    .ap-form {
+        padding: 0.8rem;
+    }
+
+    .ap-form-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .ap-step-row {
+        margin-bottom: 0.5rem;
+    }
+
+    .ap-step-input {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.65rem;
+    }
+
+    .ap-remove-step {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+    }
+
+    .ap-form-actions {
+        gap: 0.4rem;
+        margin-top: 0.65rem;
+    }
+
+    .ap-form-actions button {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.65rem;
+    }
+
+    .ap-display {
+        padding: 0.8rem;
+    }
+
+    .ap-display-header {
+        margin-bottom: 0.65rem;
+    }
+
+    .ap-label {
+        font-size: 0.85rem;
+    }
+
+    .ap-delete-btn {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.55rem;
+    }
+
+    .ap-steps-list {
+        max-height: 250px;
+        gap: 0.45rem;
+    }
+
+    .ap-step-item {
+        padding: 0.5rem 0.65rem;
+    }
+
+    .ap-step-label {
+        gap: 0.55rem;
+    }
+
+    .ap-step-title {
+        font-size: 0.8rem;
+    }
+
+    .ap-checkbox {
+        width: 15px;
+        height: 15px;
+    }
+
+    .ap-task-badge {
+        font-size: 0.65rem;
+    }
+
+    .empty-message {
+        padding: 1.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== Extra Small Mobile (380px and below) ===== */
+@media (max-width: 380px) {
+    .goals-page {
+        padding: 0.75rem;
+    }
+
+    .goals-page h2 {
+        font-size: 1.1rem;
+    }
+
+    .goal-form input,
+    .goal-form select,
+    .goal-form button,
+    .goal-form .goal-type-picker-toggle,
+    .goal-form .goal-type-picker-option {
+        font-size: 0.8rem;
+        padding: 0.55rem 0.7rem;
+    }
+
+    .goal-item {
+        padding: 0.8rem;
+    }
+
+    .goal-item strong {
+        font-size: 0.9rem;
+    }
+
+    .goal-item span {
+        font-size: 0.7rem;
+    }
+
+    .goal-actions button {
+        font-size: 0.65rem;
+        padding: 0.35rem 0.6rem;
+    }
+
+    .ap-form {
+        padding: 0.7rem;
+    }
+
+    .ap-form-title {
+        font-size: 0.85rem;
+    }
+
+    .ap-step-input {
+        font-size: 0.75rem;
+        padding: 0.45rem 0.6rem;
+    }
+
+    .ap-remove-step {
+        width: 22px;
+        height: 22px;
+        font-size: 0.7rem;
+    }
+
+    .ap-form-actions button {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.6rem;
+    }
+
+    .ap-display {
+        padding: 0.7rem;
+    }
+
+    .ap-label {
+        font-size: 0.8rem;
+    }
+
+    .ap-steps-list {
+        max-height: 200px;
+    }
+
+    .ap-step-item {
+        padding: 0.45rem 0.6rem;
+    }
+
+    .ap-step-title {
+        font-size: 0.75rem;
+    }
+
+    .ap-checkbox {
+        width: 14px;
+        height: 14px;
+    }
+
+    .ap-task-badge {
+        font-size: 0.6rem;
+    }
+}

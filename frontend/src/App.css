@@ -1,0 +1,52 @@
+/* ===== App Root ===== */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== App Layout Container ===== */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-primary, #f4f6f9);
+  transition: background-color 0.3s ease;
+  overflow: visible;
+  position: relative;
+}
+
+/* Sidebar structure */
+.app-layout.with-sidebar .main-content {
+  flex: 1;
+  margin-left: 240px; /* Width of the sidebar */
+  padding: 2rem;
+  box-sizing: border-box;
+  width: calc(100% - 240px); /* Prevents overflow */
+}
+
+.main-content {
+  width: 100%;
+  overflow: visible;
+}
+
+/* Mobile responsive padding constraints */
+@media (max-width: 768px) {
+  .app-layout.with-sidebar .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+    padding-top: 3.5rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+}
+
+/* Extra small mobile (480px and below) */
+@media (max-width: 480px) {
+  .app-layout.with-sidebar .main-content {
+    padding: 0.75rem;
+    padding-top: 3.5rem;
+  }
+}

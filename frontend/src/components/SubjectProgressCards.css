@@ -1,0 +1,164 @@
+.subject-progress-section {
+    background-color: var(--surface);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 2rem;
+}
+
+.subject-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.subject-progress-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.subject-progress-header span {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.subject-progress-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    max-height: 360px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.subject-progress-item {
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    background-color: var(--surface-muted);
+    padding: 1rem;
+    min-width: 0;
+}
+
+.subject-progress-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.8rem;
+}
+
+.subject-progress-name-block {
+    min-width: 0;
+}
+
+.subject-progress-name-block h4 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 0.98rem;
+    overflow-wrap: anywhere;
+}
+
+.subject-progress-name-block p {
+    margin: 0.25rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.subject-progress-badge {
+    flex-shrink: 0;
+    border-radius: 999px;
+    padding: 0.22rem 0.55rem;
+    background-color: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    color: #d97706;
+    font-size: 0.74rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.subject-progress-badge.done {
+    background-color: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.25);
+    color: #16a34a;
+}
+
+.subject-progress-bar-track {
+    width: 100%;
+    height: 12px;
+    border-radius: 999px;
+    background-color: var(--surface-hover);
+    overflow: hidden;
+}
+
+.subject-progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #06b6d4, #2563eb);
+    transition: width 0.4s ease;
+}
+
+.subject-progress-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.55rem;
+}
+
+.subject-progress-footer span,
+.subject-progress-empty {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.subject-progress-empty {
+    margin: 0;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .subject-progress-list {
+        grid-template-columns: 1fr;
+        max-height: 320px;
+    }
+    .subject-progress-section {
+        padding: 1.25rem;
+    }
+    .subject-progress-header h3 {
+        font-size: 1rem;
+    }
+    .subject-progress-item {
+        padding: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .subject-progress-section {
+        padding: 1rem;
+    }
+    .subject-progress-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .subject-progress-header h3 {
+        font-size: 0.95rem;
+    }
+    .subject-progress-name-block h4 {
+        font-size: 0.9rem;
+    }
+    .subject-progress-bar-track {
+        height: 10px;
+    }
+    .subject-progress-footer span {
+        font-size: 0.78rem;
+    }
+    .subject-progress-badge {
+        font-size: 0.68rem;
+        padding: 0.15rem 0.4rem;
+    }
+}

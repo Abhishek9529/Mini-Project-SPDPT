@@ -1,0 +1,451 @@
+/* ===== MyDay Section ===== */
+.myday-section {
+    background-color: var(--surface);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 2rem;
+}
+
+.myday-section h3 {
+    margin: 0 0 1.25rem;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.myday-section h3 i,
+.myday-section h4 i,
+.myday-error i,
+.myday-row-error-msg i,
+.myday-save-btn i {
+    margin-right: 0.35rem;
+}
+
+.myday-score-icon i {
+    margin-right: 0;
+}
+
+/* ===== Productivity Score Card ===== */
+.myday-score-card {
+    background-color: var(--surface);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.myday-score-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.myday-score-icon {
+    font-size: 1.3rem;
+}
+
+.myday-score-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.myday-score-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.myday-score-bar-track {
+    width: 100%;
+    height: 10px;
+    background-color: var(--surface-hover);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.myday-score-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.6s ease;
+}
+
+.myday-score-hint {
+    margin: 0.4rem 0 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ===== Recommendations Card ===== */
+.myday-reco-card {
+    background-color: var(--surface);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.myday-reco-card h4 {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.myday-reco-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.myday-reco-item {
+    padding: 0.6rem 0.75rem;
+    background-color: rgba(99, 102, 241, 0.08);
+    border-left: 3px solid #6366f1;
+    border-radius: 0 6px 6px 0;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+}
+
+/* ===== Dual Pie Charts ===== */
+.myday-charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.myday-chart-card {
+    background-color: var(--surface);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.myday-chart-card h4 {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.myday-chart-wrapper {
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+.myday-placeholder-text {
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* ===== Input Form ===== */
+.myday-form-card {
+    background-color: var(--surface);
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.myday-form-card h4 {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Column headers */
+.myday-form-header {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr 36px;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-default);
+    margin-bottom: 0.6rem;
+}
+
+.myday-form-header span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.myday-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Wrapper for each row + its error message */
+.myday-form-row-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.myday-form-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr 36px;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* Per-row inline error message */
+.myday-row-error-msg {
+    font-size: 0.78rem;
+    color: #f87171;
+    padding-left: 0.2rem;
+}
+
+/* Error state on inputs */
+.input-error {
+    border-color: #ef4444 !important;
+    background-color: rgba(239, 68, 68, 0.05) !important;
+}
+
+.input-error:focus {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+/* Shared input styles */
+.myday-name-input,
+.myday-hours-input,
+.myday-note-input {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border-default);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.myday-name-input:focus,
+.myday-hours-input:focus,
+.myday-note-input:focus {
+    outline: none;
+    border-color: #6366f1;
+}
+
+.myday-hours-input {
+    text-align: center;
+}
+
+.myday-name-input::placeholder,
+.myday-hours-input::placeholder,
+.myday-note-input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Remove button */
+.myday-remove-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.myday-remove-btn:hover:not(:disabled) {
+    border-color: #ef4444;
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.myday-remove-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Add button */
+.myday-add-btn {
+    margin-top: 0.75rem;
+    padding: 0.45rem 1rem;
+    background-color: transparent;
+    border: 1px dashed var(--border-default);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.myday-add-btn:hover:not(:disabled) {
+    border-color: #6366f1;
+    color: #a78bfa;
+}
+
+.myday-add-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ===== Footer (total + button) ===== */
+.myday-form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-default);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.myday-total {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #a78bfa;
+}
+
+.myday-remaining {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.myday-total-error {
+    color: #ef4444 !important;
+}
+
+.myday-error {
+    font-size: 0.85rem;
+    color: #ef4444;
+}
+
+.myday-save-btn {
+    padding: 0.6rem 1.5rem;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+.myday-save-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.myday-save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .myday-charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .myday-form-row,
+    .myday-form-header {
+        grid-template-columns: 1fr 60px 1fr 32px;
+        gap: 0.4rem;
+    }
+    .myday-section {
+        padding: 1.25rem;
+    }
+    .myday-section h3 {
+        font-size: 1.05rem;
+    }
+    .myday-score-card {
+        padding: 0.85rem 1rem;
+    }
+    .myday-score-value {
+        font-size: 1.3rem;
+    }
+    .myday-score-label {
+        font-size: 0.88rem;
+    }
+    .myday-chart-card {
+        padding: 1rem;
+    }
+    .myday-chart-card h4 {
+        font-size: 0.92rem;
+    }
+    .myday-form-card {
+        padding: 1rem;
+    }
+    .myday-save-btn {
+        padding: 0.55rem 1.2rem;
+        font-size: 0.85rem;
+    }
+    .myday-reco-card {
+        padding: 1rem;
+    }
+    .myday-reco-item {
+        font-size: 0.82rem;
+        padding: 0.5rem 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .myday-form-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.3rem;
+    }
+
+    .myday-form-header {
+        display: none;
+    }
+
+    .myday-remove-btn {
+        grid-column: 2;
+        justify-self: end;
+    }
+    .myday-section {
+        padding: 1rem;
+    }
+    .myday-section h3 {
+        font-size: 0.95rem;
+    }
+    .myday-score-value {
+        font-size: 1.1rem;
+    }
+    .myday-score-label {
+        font-size: 0.82rem;
+    }
+    .myday-score-bar-track {
+        height: 8px;
+    }
+    .myday-chart-card {
+        padding: 0.85rem;
+    }
+    .myday-chart-wrapper {
+        max-width: 220px;
+    }
+    .myday-save-btn {
+        width: 100%;
+        padding: 0.55rem 1rem;
+        font-size: 0.82rem;
+    }
+    .myday-total {
+        font-size: 0.85rem;
+    }
+    .myday-form-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+}
