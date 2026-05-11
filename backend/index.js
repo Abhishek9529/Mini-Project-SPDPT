@@ -5,8 +5,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://mini-project-spdpt.vercel.app",
-    process.env.FRONTEND_URL
+    process.env.FRONTEND_URL,
+    ...(process.env.FRONTEND_URLS ? process.env.FRONTEND_URLS.split(",") : [])
 ].filter(Boolean);
 
 // Enable CORS for frontend
