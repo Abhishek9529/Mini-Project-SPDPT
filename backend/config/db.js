@@ -1,13 +1,23 @@
 const mongoose = require('mongoose');
 
+let cachedConnection = null;
+
 const connectDB = async () => {
     try {
+        if (cachedConnection && mongoose.connection.readyState === 1) {
+            return cachedConnection;
+        }
+
         const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/SPDPT';
-        await mongoose.connect(mongoUri);
+        cachedConnection = await mongoose.connect(mongoUri, {
+            serverSelectionTimeoutMS: 10000
+        });
         console.log("MongoDB connected");
+        return cachedConnection;
     } catch (error) {
-        console.log(error);
-        process.exit(1);
+        cachedConnection = null;
+        console.error("MongoDB connection failed:", error.message);
+        throw error;
     }
 }
 

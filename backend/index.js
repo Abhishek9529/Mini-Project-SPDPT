@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const allowedOrigins = [
     "http://localhost:5173",
+    "https://mini-project-spdpt.vercel.app",
     process.env.FRONTEND_URL
 ].filter(Boolean);
 
@@ -37,8 +38,18 @@ const myDayRoutes = require('../backend/routes/myDay.js');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// mongodb connnection
-connectDB();
+// MongoDB connection middleware for serverless deployments.
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        res.status(503).json({
+            message: "Database connection failed",
+            error: error.message
+        });
+    }
+});
 
 
 // root route
