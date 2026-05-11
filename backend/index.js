@@ -2,11 +2,20 @@ require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const allowedOrigins = [
+    "http://localhost:5173",
+    process.env.FRONTEND_URL
+].filter(Boolean);
 
 // Enable CORS for frontend
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true
 }));
 const connectDB = require('../backend/config/db.js');
@@ -65,8 +74,10 @@ app.get("/api/protected", authMiddleware, (req, res) => {
     });
 });
 
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`server is running on ${port}`);
+    });
+}
 
-
-app.listen(port, () => {
-    console.log(`server is running on ${port}`);
-})
+module.exports = app;
