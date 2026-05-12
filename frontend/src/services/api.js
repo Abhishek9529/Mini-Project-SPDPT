@@ -1,7 +1,14 @@
 import axios from "axios";
 
+const normalizeApiBaseUrl = (url) => {
+  const fallbackUrl = "http://localhost:3000/api";
+  const baseUrl = (url || fallbackUrl).replace(/\/$/, "");
+
+  return baseUrl.endsWith("/api") ? baseUrl : `${baseUrl}/api`;
+};
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api"
+  baseURL: normalizeApiBaseUrl(import.meta.env.VITE_API_BASE_URL)
 });
 
 // Attach JWT token to every request

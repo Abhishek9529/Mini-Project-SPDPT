@@ -3,16 +3,38 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
+
+const parseOrigins = (value) =>
+    value
+        ? value.split(",").map((origin) => origin.trim().replace(/\/$/, "")).filter(Boolean)
+        : [];
+
 const allowedOrigins = [
     "http://localhost:5173",
     process.env.FRONTEND_URL,
-    ...(process.env.FRONTEND_URLS ? process.env.FRONTEND_URLS.split(",") : [])
-].filter(Boolean);
+    ...parseOrigins(process.env.FRONTEND_URLS)
+]
+    .filter(Boolean)
+    .map((origin) => origin.replace(/\/$/, ""));
+
+const isAllowedOrigin = (origin) => {
+    if (!origin) return true;
+
+    const normalizedOrigin = origin.replace(/\/$/, "");
+    if (allowedOrigins.includes(normalizedOrigin)) return true;
+
+    try {
+        const { hostname } = new URL(normalizedOrigin);
+        return hostname === "localhost" || hostname.endsWith(".vercel.app");
+    } catch {
+        return false;
+    }
+};
 
 // Enable CORS for frontend
 app.use(cors({
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (isAllowedOrigin(origin)) {
             return callback(null, true);
         }
         return callback(new Error("Not allowed by CORS"));
