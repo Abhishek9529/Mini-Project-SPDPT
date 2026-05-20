@@ -25,7 +25,7 @@ const isAllowedOrigin = (origin) => {
 
     try {
         const { hostname } = new URL(normalizedOrigin);
-        return hostname === "localhost" || hostname.endsWith(".vercel.app");
+        return hostname === "localhost" || hostname.endsWith(".vercel.app") || hostname.endsWith(".onrender.com");
     } catch {
         return false;
     }
