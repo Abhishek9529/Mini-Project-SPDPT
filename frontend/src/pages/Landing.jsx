@@ -23,7 +23,7 @@ const Landing = () => {
           </p>
           <div className="hero-cta">
             <Link to="/register" className="btn-primary">Start Tracking Now</Link>
-            <a href="#features" className="btn-secondary">Explore Features</a>
+            <Link to="/login" className="btn-tertiary">Login</Link>
           </div>
         </div>
       </section>

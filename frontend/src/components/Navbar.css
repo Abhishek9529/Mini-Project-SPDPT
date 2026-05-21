@@ -102,6 +102,52 @@
     transform: translateY(0);
 }
 
+/* ===== Theme and Notification Buttons ===== */
+.navbar-theme-btn,
+.navbar-notification-btn {
+    width: 50%;
+    padding: 0.8rem 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.theme-notification {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 0;
+}
+
+.navbar-theme-btn i,
+.navbar-notification-btn i {
+    font-size: 1rem;
+}
+
+.navbar-theme-btn:hover,
+.navbar-notification-btn:hover {
+    color: var(--accent-primary);
+    background-color: var(--accent-primary-soft);
+}
+
+/* ===== Navbar Divider ===== */
+.navbar-divider {
+    height: 1px;
+    background-color: var(--border-default);
+    margin: 0.25rem 0 !important;
+    list-style: none;
+}
+
 /* ===== Hamburger (mobile) ===== */
 .navbar-hamburger {
     display: none;
@@ -221,9 +267,42 @@
     .navbar-links li:last-child {
         margin-top: 0.5rem;
         margin-bottom: 0;
-        padding: 0 1rem;
+        padding: 0;
         border-top: 1px solid var(--border-default);
-        padding-top: 0.75rem;
+        padding-top: 0;
+    }
+
+    .navbar-theme-btn,
+    .navbar-notification-btn {
+        padding: 0.85rem 1rem;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 0;
+        border-radius: 0;
+        text-align: center;
+    }
+
+    .navbar-theme-btn i,
+    .navbar-notification-btn i {
+        font-size: 0.95rem;
+    }
+
+    .theme-notification {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        gap: 0;
+        border-top: 1px solid var(--border-default);
+    }
+
+    .navbar-divider {
+        height: 1px;
+        background-color: var(--border-default);
+        margin: 0.25rem 0 !important;
+        list-style: none;
     }
 
     .navbar-logout-btn {

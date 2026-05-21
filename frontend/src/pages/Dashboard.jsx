@@ -385,29 +385,6 @@ function Dashboard() {
 
   return (
     <div className="dashboard-page">
-      <div className="dashboard-header">
-        <h2>Student Dashboard</h2>
-        <div className="dashboard-header-actions">
-          <button
-            type="button"
-            className="dashboard-theme-btn"
-            onClick={toggleTheme}
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            <i className={isDark ? "ri-sun-line" : "ri-moon-line"} aria-hidden="true"></i>
-          </button>
-          <button
-            type="button"
-            onClick={testNotification}
-            className="dashboard-notification-btn"
-            title="Preview morning notification"
-          >
-            <i className="ri-notification-3-line" aria-hidden="true"></i>
-            Test Notification
-          </button>
-        </div>
-      </div>
 
       {/* ===== Morning Smart Reminder Banner ===== */}
       <TaskReminder

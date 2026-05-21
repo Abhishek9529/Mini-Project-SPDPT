@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 import "./Navbar.css";
 
 function Navbar() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
+    const { isDark, toggleTheme } = useTheme();
+    const studentName = JSON.parse(localStorage.getItem("student"))?.name || "Student";
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -13,6 +16,30 @@ function Navbar() {
     };
 
     const closeMenu = () => setMenuOpen(false);
+
+    const testNotification = async () => {
+        if (!('Notification' in window)) {
+            alert('Your browser does not support notifications.');
+            return;
+        }
+
+        const permission = await Notification.requestPermission();
+        if (permission !== 'granted') {
+            alert('Please allow notifications first.');
+            return;
+        }
+
+        if ('serviceWorker' in navigator) {
+            const reg = await navigator.serviceWorker.ready;
+            reg.showNotification(`Good Morning, ${studentName}!`, {
+                body: "Test notification triggered. You're all set!",
+                icon: '/vite.svg',
+                badge: '/vite.svg',
+                tag: 'spdpt-test-notification',
+                requireInteraction: false
+            });
+        }
+    };
 
     return (
         <nav className="navbar">
@@ -61,6 +88,27 @@ function Navbar() {
                         Logout
                     </button>
                 </li>
+                <li className="navbar-divider"></li>
+                <li className="theme-notification">
+                    <button 
+                        className="navbar-theme-btn" 
+                        onClick={() => { toggleTheme(); closeMenu(); }}
+                        title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+                    >
+                        <i className={isDark ? "ri-sun-line" : "ri-moon-line"} aria-hidden="true"></i>
+                        {/* {isDark ? "Light Mode" : "Dark Mode"} */}
+                    </button>
+
+                    <button 
+                        className="navbar-notification-btn" 
+                        onClick={() => { testNotification(); closeMenu(); }}
+                        title="Preview morning notification"
+                    >
+                        <i className="ri-notification-3-line" aria-hidden="true"></i>
+                        {/* Test Notification */}
+                    </button>
+                </li>
+                
             </ul>
         </nav>
     );

@@ -204,6 +204,24 @@
     line-height: 1.4;
 }
 
+/* ===== Form Group ===== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #17335d;
+    display: block;
+}
+
+[data-theme="dark"] .form-label {
+    color: var(--text-primary);
+}
+
 /* ===== Error message ===== */
 .register-error {
     display: flex;

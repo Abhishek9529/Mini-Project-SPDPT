@@ -8,7 +8,7 @@ function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [branch, setBranch] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
@@ -29,7 +29,8 @@ function Register() {
         if (!/(?=.*[a-zA-Z])/.test(password)) return "Password must contain at least one letter.";
         if (!/(?=.*\d)/.test(password)) return "Password must contain at least one number.";
         if (!/(?=.*[@$!%*?&_#-])/.test(password)) return "Password must contain at least one special character (@$!%*?&_#-).";
-        if (!branch.trim()) return "Branch is required.";
+        if (!confirmPassword) return "Please confirm your password.";
+        if (password !== confirmPassword) return "Passwords do not match.";
         return null;
     };
 
@@ -49,8 +50,7 @@ function Register() {
             const res = await API.post("/students", {
                 name: name.trim(),
                 email: email.trim(),
-                password,
-                branch
+                password
             });
 
             setSuccess(res.data.message || "Registration successful! Redirecting to login...");
@@ -95,37 +95,57 @@ function Register() {
                     </div>
 
                     <form className="register-form" onSubmit={handleSubmit}>
-                        <input
-                            placeholder="Type your full name"
-                            value={name}
-                            onChange={(e) => { setName(e.target.value); clearError(); }}
-                            required
-                        />
-                        <input
-                            type="email"
-                            placeholder="Type your email"
-                            value={email}
-                            onChange={(e) => { setEmail(e.target.value); clearError(); }}
-                            required
-                        />
-                        <div className="register-password-wrap">
+                        <div className="form-group">
+                            <label htmlFor="name" className="form-label">Full Name</label>
                             <input
-                                type="password"
-                                placeholder="Type your password"
-                                value={password}
-                                onChange={(e) => { setPassword(e.target.value); clearError(); }}
+                                id="name"
+                                placeholder="Type your full name"
+                                value={name}
+                                onChange={(e) => { setName(e.target.value); clearError(); }}
                                 required
                             />
-                            <p className="register-password-hint">
-                                Min 6 chars, must include a letter, a number &amp; a special character (@$!%*?&amp;_#-)
-                            </p>
                         </div>
-                        <input
-                            placeholder="Type your branch (e.g. Computer Science)"
-                            value={branch}
-                            onChange={(e) => { setBranch(e.target.value); clearError(); }}
-                            required
-                        />
+
+                        <div className="form-group">
+                            <label htmlFor="email" className="form-label">Email</label>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="Type your email"
+                                value={email}
+                                onChange={(e) => { setEmail(e.target.value); clearError(); }}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <div className="register-password-wrap">
+                                <input
+                                    id="password"
+                                    type="password"
+                                    placeholder="Type your password"
+                                    value={password}
+                                    onChange={(e) => { setPassword(e.target.value); clearError(); }}
+                                    required
+                                />
+                                <p className="register-password-hint">
+                                    Min 6 chars, must include a letter, a number &amp; a special character (@$!%*?&amp;_#-)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                            <input
+                                id="confirmPassword"
+                                type="password"
+                                placeholder="Re-enter your password"
+                                value={confirmPassword}
+                                onChange={(e) => { setConfirmPassword(e.target.value); clearError(); }}
+                                required
+                            />
+                        </div>
 
                         {error && (
                             <div className="register-error" role="alert">

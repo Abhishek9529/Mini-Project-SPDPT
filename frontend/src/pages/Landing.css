@@ -158,6 +158,27 @@
   color: var(--btn-secondary-color);
 }
 
+.btn-tertiary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  -webkit-text-fill-color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+  display: inline-block;
+}
+
+.btn-tertiary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
+  color: white;
+  -webkit-text-fill-color: white;
+}
+
 /* ===== Glass Mockup ===== */
 .hero-preview {
   margin-top: 80px;
