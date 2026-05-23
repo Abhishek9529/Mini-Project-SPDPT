@@ -62,9 +62,6 @@ router.post("/", async (req, res) => {
     if (!/(?=.*[@$!%*?&_#-])/.test(password)) {
       return res.status(400).json({ message: "Password must contain at least one special character." });
     }
-    if (!branch || !branch.trim()) {
-      return res.status(400).json({ message: "Branch is required." });
-    }
 
     // check existing user
     const existingStudent = await Student.findOne({ email: email.trim().toLowerCase() });
