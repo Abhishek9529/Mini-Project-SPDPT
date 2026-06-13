@@ -30,7 +30,7 @@ function Login() {
             setLoading(false);
         }
     };
-
+password
     return (
         <div className="login-shell">
             <section className="login-panel login-panel-left">
@@ -85,9 +85,9 @@ function Login() {
                             </div>
                         )}
 
-                        <div className="login-form-meta">
+                        {/* <div className="login-form-meta">
                             <span className="login-forgot">Forgot your password?</span>
-                        </div>
+                        </div> */}
 
                         <button type="submit" disabled={loading}>
                             {loading ? <span className="login-spinner"></span> : "Login Now"}
