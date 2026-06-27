@@ -4,17 +4,15 @@ const Task = require("../models/Task");
 const Progress = require("../models/Progress");
 const ActionPlan = require("../models/ActionPlan");
 
-const getGoalTaskFilter = (goalId) => ({
-  goalId,
-  subjectId: null,
-  taskType: { $ne: "lecture-subtask" }
-});
+// Helper: get filter for tasks linked to a specific goal
+const getGoalTaskFilter = (goalId) => ({ goalId });
 
 // CREATE TASK
 router.post("/", async (req, res) => {
   try {
-    // --- Server-side validation for taskTitle ---
     const { taskTitle, studentId } = req.body;
+
+    // --- Server-side validation ---
     if (!studentId) {
       return res.status(400).json({ error: "studentId is required." });
     }
@@ -26,30 +24,6 @@ router.post("/", async (req, res) => {
     }
     if (taskTitle.trim().length < 3) {
       return res.status(400).json({ error: "Task title must be at least 3 characters." });
-    }
-
-    // Check duplicate logic for the single daily lecture task.
-    // Lecture sub-tasks intentionally allow multiple tasks for the same subject/day.
-    const isLectureSubtask = req.body.taskType === "lecture-subtask";
-    if (req.body.subjectId && req.body.date && !isLectureSubtask) {
-      const dayStart = new Date(req.body.date);
-      dayStart.setHours(0, 0, 0, 0);
-      const dayEnd = new Date(req.body.date);
-      dayEnd.setHours(23, 59, 59, 999);
-
-      const existingTask = await Task.findOne({
-        studentId: req.body.studentId,
-        subjectId: req.body.subjectId,
-        date: { $gte: dayStart, $lte: dayEnd },
-        taskType: { $ne: "lecture-subtask" }
-      });
-
-      if (existingTask) {
-        return res.status(200).json({
-          message: "Task already exists",
-          task: existingTask
-        });
-      }
     }
 
     const task = new Task(req.body);
@@ -79,110 +53,10 @@ router.post("/", async (req, res) => {
   }
 });
 
-// CHECK IF TASK EXISTS FOR A SUBJECT ON A SPECIFIC DATE
-// Endpoint: GET /api/tasks/check/:studentId/:subjectId/:date
-// Returns the task if it exists, used by timetable checkbox
-router.get("/check/:studentId/:subjectId/:date", async (req, res) => {
-  try {
-    const { studentId, subjectId, date } = req.params;
-
-    // Build date range for the entire day (00:00:00 to 23:59:59)
-    const dayStart = new Date(date);
-    dayStart.setHours(0, 0, 0, 0);
-    const dayEnd = new Date(date);
-    dayEnd.setHours(23, 59, 59, 999);
-
-    const task = await Task.findOne({
-      studentId,
-      subjectId,
-      date: { $gte: dayStart, $lte: dayEnd },
-      taskType: { $ne: "lecture-subtask" }
-    });
-
-    if (task) {
-      return res.status(200).json({ exists: true, task });
-    }
-
-    res.status(200).json({ exists: false, task: null });
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// GET SUB-TASKS BY SUBJECT AND DATE
-// Endpoint: GET /api/tasks/subject/:studentId/:subjectId/:date
-// Returns all tasks for a specific subject on a specific date, sorted by creation date
-router.get("/subject/:studentId/:subjectId/:date", async (req, res) => {
-  console.log("Subject endpoint hit with params:", req.params);
-  try {
-    const { studentId, subjectId, date } = req.params;
-
-    // Validate ObjectId format for studentId and subjectId
-    if (!studentId.match(/^[0-9a-fA-F]{24}$/)) {
-      return res.status(400).json({
-        error: "Invalid student ID format"
-      });
-    }
-
-    if (!subjectId.match(/^[0-9a-fA-F]{24}$/)) {
-      return res.status(400).json({
-        error: "Invalid subject ID format"
-      });
-    }
-
-    // Validate date format (YYYY-MM-DD)
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    if (!dateRegex.test(date)) {
-      return res.status(400).json({
-        error: "Invalid date format. Expected YYYY-MM-DD"
-      });
-    }
-
-    // Build date range for the entire day (00:00:00 to 23:59:59)
-    const dayStart = new Date(date);
-    dayStart.setHours(0, 0, 0, 0);
-    const dayEnd = new Date(date);
-    dayEnd.setHours(23, 59, 59, 999);
-
-    // Check if date is valid
-    if (isNaN(dayStart.getTime())) {
-      return res.status(400).json({
-        error: "Invalid date value"
-      });
-    }
-
-    // Fetch tasks filtered by studentId, subjectId, and date range
-    const tasks = await Task.find({
-      studentId,
-      subjectId,
-      taskType: "lecture-subtask",
-      date: { $gte: dayStart, $lte: dayEnd }
-    }).sort({ createdAt: 1 }); // Sort by creation date ascending
-
-    res.status(200).json({
-      message: "Sub-tasks retrieved successfully",
-      count: tasks.length,
-      tasks
-    });
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-console.log("Subject route registered: GET /subject/:studentId/:subjectId/:date");
-
-// Simple test route
-router.get("/subject-test", (req, res) => {
-  res.json({ message: "Subject test route works!" });
-});
-
 // GET ALL TASKS BY STUDENT ID
 // Endpoint: GET /api/tasks/:studentId
 // Returns all tasks belonging to a specific student
-// NOTE: This route must be defined AFTER all specific routes to avoid catching them
 router.get("/:studentId", async (req, res) => {
-  console.log("/:studentId route hit with param:", req.params.studentId);
   try {
     const { studentId } = req.params;
 

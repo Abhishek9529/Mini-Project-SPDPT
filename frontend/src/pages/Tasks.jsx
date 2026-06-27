@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import "./Tasks.css";
 
-const isSubjectTask = (task) => {
-    return !!task?.subjectId || task?.taskType === "lecture-subtask";
-};
 
 function TaskGoalPicker({ goals, value, onChange, disabled }) {
     const [open, setOpen] = useState(false);
@@ -79,7 +76,7 @@ function Tasks() {
             API.get(`/goals/${student._id}`)
         ])
             .then(([tasksRes, goalsRes]) => {
-                const generalTasks = (tasksRes.data.tasks || []).filter(task => !isSubjectTask(task));
+                const generalTasks = tasksRes.data.tasks || [];
                 setTasks(generalTasks);
                 setGoals(goalsRes.data.goals);
                 setLoading(false);
@@ -346,7 +343,7 @@ function Tasks() {
 
             {/* Tasks List */}
             {tasks.length === 0 ? (
-                <p className="empty-message">No general tasks found. Subject sub-tasks are managed on the dashboard.</p>
+                <p className="empty-message">No tasks found. Add your first task above.</p>
             ) : (
                 <div className="goal-task-sections">
                     {goalSections.map(section => (

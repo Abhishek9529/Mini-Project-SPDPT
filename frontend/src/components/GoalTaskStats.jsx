@@ -1,6 +1,6 @@
 import "./GoalTaskStats.css";
 
-function GoalTaskStats({ goals, totalSubjects, totalGoals }) {
+function GoalTaskStats({ goals, totalGoals }) {
     const visibleGoals = goals || [];
 
     return (
@@ -8,10 +8,9 @@ function GoalTaskStats({ goals, totalSubjects, totalGoals }) {
             <div className="goal-stats-header">
                 <div>
                     <h3>Goal Task Status</h3>
-                    <p>Tasks are grouped by goal, separate from subject sub-tasks.</p>
+                    <p>Tasks are grouped by goal.</p>
                 </div>
                 <div className="goal-stats-overview">
-                    <span>{totalSubjects} subjects</span>
                     <span>{totalGoals} goals</span>
                 </div>
             </div>

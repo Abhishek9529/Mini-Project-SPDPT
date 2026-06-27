@@ -63,11 +63,7 @@ function Navbar() {
                         Dashboard
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to="/subjects" onClick={closeMenu}>
-                        Subjects
-                    </NavLink>
-                </li>
+
                 <li>
                     <NavLink to="/goals" onClick={closeMenu}>
                         Goals

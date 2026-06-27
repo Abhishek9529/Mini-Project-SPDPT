@@ -4,11 +4,13 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
+//helper function 
 const parseOrigins = (value) =>
     value
         ? value.split(",").map((origin) => origin.trim().replace(/\/$/, "")).filter(Boolean)
         : [];
 
+// allowed list of frontend origins (URLs)
 const allowedOrigins = [
     "http://localhost:5173",
     process.env.FRONTEND_URL,
@@ -41,9 +43,10 @@ app.use(cors({
     },
     credentials: true
 }));
+
 const connectDB = require('../backend/config/db.js');
 const studentRoutes = require('../backend/routes/students.js');
-const subjectRoutes = require('../backend/routes/subjects.js');
+
 const goalRoutes = require('../backend/routes/goals.js');
 const actionPlanRoutes = require("../backend/routes/actionsPlans.js");
 const taskRoutes = require('../backend/routes/tasks.js');
@@ -51,7 +54,7 @@ const progressRoutes = require('../backend/routes/progress.js');
 const authRoutes = require('../backend/routes/auth.js');
 const authMiddleware = require('../backend/middleware/auth.js');
 const dashboardRoutes = require('../backend/routes/dashboard.js');
-const timetableRoutes = require('../backend/routes/timetable.js');
+
 const myDayRoutes = require('../backend/routes/myDay.js');
 
 
@@ -90,13 +93,13 @@ app.use('/api/students', (req, res, next) => {
 }, studentRoutes);
 
 // ===== PROTECTED ROUTES (token required) =====
-app.use('/api/subjects', authMiddleware, subjectRoutes);
+
 app.use('/api/goals', authMiddleware, goalRoutes);
 app.use('/api/actionPlans', authMiddleware, actionPlanRoutes);
 app.use('/api/tasks', authMiddleware, taskRoutes);
 app.use('/api/progress', authMiddleware, progressRoutes);
 app.use("/api/dashboard", authMiddleware, dashboardRoutes);
-app.use('/api/timetable', authMiddleware, timetableRoutes);
+
 app.use("/api/myday", authMiddleware, myDayRoutes);
 
 // protected test route

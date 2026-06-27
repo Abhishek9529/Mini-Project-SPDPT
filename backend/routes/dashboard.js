@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Subject = require("../models/Subject");
 const Goal = require("../models/Goal");
 const Task = require("../models/Task");
 
 const getGeneralTaskFilter = (studentId) => ({
-  studentId,
-  subjectId: null,
-  taskType: { $ne: "lecture-subtask" }
+  studentId
 });
 
 // DASHBOARD SUMMARY
@@ -15,7 +12,6 @@ router.get("/:studentId", async (req, res) => {
   try {
     const { studentId } = req.params;
 
-    const totalSubjects = await Subject.countDocuments({ studentId });
     const totalGoals = await Goal.countDocuments({ studentId });
     const generalTaskFilter = getGeneralTaskFilter(studentId);
     const totalTasks = await Task.countDocuments(generalTaskFilter);
@@ -52,7 +48,6 @@ router.get("/:studentId", async (req, res) => {
 
     res.status(200).json({
       studentId,
-      totalSubjects,
       totalGoals,
       totalTasks,
       completedTasks,

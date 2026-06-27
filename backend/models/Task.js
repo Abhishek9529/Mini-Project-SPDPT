@@ -19,12 +19,6 @@ const taskSchema = new mongoose.Schema({
     default: null
   },
 
-  subjectId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Subject",
-    default: null
-  },
-
   date: {
     type: Date,
     default: null
@@ -37,7 +31,7 @@ const taskSchema = new mongoose.Schema({
 
   taskType: {
     type: String,
-    enum: ["general", "daily-study", "lecture-subtask"],
+    enum: ["general", "daily-study"],
     default: "general"
   },
 

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-route
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Subjects from "./pages/Subjects";
+
 import Goals from "./pages/Goals";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
@@ -78,7 +78,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile-setup" element={<PrivateRoute><ProfileSetup /></PrivateRoute>} />
             <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-            <Route path="/subjects" element={<PrivateRoute><Subjects /></PrivateRoute>} />
+
             <Route path="/goals" element={<PrivateRoute><Goals /></PrivateRoute>} />
             <Route path="/tasks" element={<PrivateRoute><Tasks /></PrivateRoute>} />
             <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
